@@ -1,0 +1,51 @@
+{% extends 'layout/main.html.twig' %}
+
+{% block title %}
+    {% if annee is defined and mois is defined %}
+        Événements de {{ '%02d'|format(mois) }}/{{ annee }}
+    {% else %}
+        Tous les événements
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+    {# Messages flash (erreurs "Année invalide" / "Mois invalide") #}
+    {% for type, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ type }}">{{ message }}</div>
+        {% endfor %}
+    {% endfor %}
+
+    {% if annee is defined and mois is defined %}
+        <h1 class="mb-3">Événements de {{ '%02d'|format(mois) }}/{{ annee }}</h1>
+        <a href="{{ path('app_evenement_index') }}" class="btn btn-outline-secondary mb-3">← Tous les événements</a>
+    {% else %}
+        <h1 class="mb-3">Tous les événements</h1>
+    {% endif %}
+
+
+    {{ include('components/category_filters.html.twig', {active: null}) }}
+
+    <h2>Notre meilleure offre</h2>
+    {% if moins_cher %}
+        <div>
+            <h3>{{ moins_cher.titre }}</h3>
+            <p>{{ moins_cher.prix }} €</p>
+            <p>{{ moins_cher.lieu }}</p>
+        </div>
+    {% else %}
+        <p>Aucune offre payante pour le moment.</p>
+    {% endif %}
+
+    <div class="row g-4">
+        {% for evenement in evenements %}
+            <div class="col-md-6 col-lg-4">
+                {{ include('components/evenement_card.html.twig', {evenement: evenement}) }}
+            </div>
+        {% else %}
+            <p>Aucun événement pour cette période.</p>
+        {% endfor %}
+    </div>
+
+{% endblock %}

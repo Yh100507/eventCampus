@@ -1,0 +1,18 @@
+{% extends 'layout/main.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block content %}
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="mb-0">Prochains événements</h1>
+        <a href="{{ path('app_evenement_index') }}" class="btn btn-outline-primary">Tout voir</a>
+    </div>
+
+    <div class="row g-4">
+        {% for evenement in evenements %}
+            <div class="col-md-6 col-lg-4">
+                {{ include('components/evenement_card.html.twig', {evenement: evenement}) }}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
