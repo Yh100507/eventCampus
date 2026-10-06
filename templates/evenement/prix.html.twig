@@ -1,0 +1,32 @@
+{% extends 'layout/main.html.twig' %}
+
+{% block title %}Petits budgets{% endblock %}
+
+{% block content %}
+    {# 1. Le titre change selon max #}
+    {% if max == 0 %}
+        <h1 class="mb-3">{{ evenements|length }} événement(s) gratuit(s)</h1>
+    {% else %}
+        <h1 class="mb-3">{{ evenements|length }} événement(s) à {{ max }} € maximum</h1>
+    {% endif %}
+
+    {# 2. Une ligne par événement #}
+    {% for evenement in evenements %}
+        <p>
+            {{ evenement.titre }} —
+
+            {% if evenement.prix == 0 %}
+                Gratuit
+            {% else %}
+                {{ evenement.prix }} €
+            {% endif %}
+
+            {% if evenement.places_disponibles >= 1 and evenement.places_disponibles <= 10 %}
+                <span class="badge text-bg-danger">Dernières places</span>
+            {% endif %}
+        </p>
+        {# 3. Liste vide #}
+    {% else %}
+        <p>Aucun événement.</p>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ include('components/navigation.html.twig') }}
+
+    <main class="container py-4">
+        {% for type, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ type }}">{{ message }}</div>
+            {% endfor %}
+        {% endfor %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    {{ include('components/footer.html.twig') }}
+{% endblock %}

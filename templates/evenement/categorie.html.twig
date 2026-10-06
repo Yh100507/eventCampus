@@ -1,0 +1,21 @@
+{% extends 'layout/main.html.twig' %}
+
+{% block title %}Événements {{ categorie }}{% endblock %}
+
+{% block content %}
+    <h1 class="mb-3">Catégorie : {{ categorie|capitalize }}</h1>
+
+    {{ include('components/category_filters.html.twig', {active: categorie}) }}
+
+    <div class="row g-4">
+        {% for evenement in evenements %}
+            <div class="col-md-6 col-lg-4">
+                {{ include('components/evenement_card.html.twig', {evenement: evenement}) }}
+            </div>
+        {% else %}
+            <p>Aucun événement dans cette catégorie.</p>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+

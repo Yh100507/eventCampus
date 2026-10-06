@@ -1,0 +1,18 @@
+{% extends 'layout/main.html.twig' %}
+
+{% block title %}Statistiques{% endblock %}
+
+{% block content %}
+    <h1>Statistiques des événements</h1>
+
+    <p>Nombre d'événements : {{ stats.total }}</p>
+    <p>Places disponibles : {{ stats.places_disponibles }} sur {{ stats.places_totales }}</p>
+
+    <h2>Répartition par catégorie</h2>
+    <ul>
+        {% for categorie, ligne in stats.par_categorie %}
+            <li>{{ categorie }} : {{ ligne.nombre }} événement(s), soit {{ ligne.pourcentage }} %</li>
+        {% endfor %}
+    </ul>
+    <p> Evenements à guichet fermes:{{ guichets_fermes}}</p>
+{% endblock %}

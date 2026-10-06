@@ -1,0 +1,29 @@
+<div class="card h-100 shadow-sm">
+    <img src="{{ asset('images/evenements/' ~ evenement.image) }}"
+         class="card-img-top" alt="{{ evenement.titre }}"
+         style="height: 160px; object-fit: cover; background: #dee2e6;"
+         onerror="this.style.visibility='hidden'">
+
+    <div class="card-body">
+        <div class="d-flex justify-content-between mb-2">
+            <span class="badge text-bg-secondary">{{ evenement.categorie|capitalize }}</span>
+
+            {% if evenement.statut == 'annule' %}
+                <span class="badge text-bg-danger">Annulé</span>
+            {% elseif evenement.statut == 'complet' %}
+                <span class="badge text-bg-warning">Complet</span>
+            {% else %}
+                <span class="badge text-bg-success">Ouvert</span>
+            {% endif %}
+        </div>
+
+        <h5 class="card-title">{{ evenement.titre }}</h5>
+        <p class="card-text mb-1"><i class="bi bi-calendar-event"></i> {{ evenement.date_debut|date('d/m/Y H:i') }}</p>
+        <p class="card-text mb-1"><i class="bi bi-geo-alt"></i> {{ evenement.lieu }}</p>
+        <p class="card-text fw-bold">{{ evenement.prix > 0 ? evenement.prix ~ ' €' : 'Gratuit' }}</p>
+    </div>
+
+    <div class="card-footer bg-white border-0 pb-3">
+        <a href="{{ path('app_evenement_show', {id: evenement.id}) }}" class="btn btn-primary w-100">Voir le détail</a>
+    </div>
+</div>

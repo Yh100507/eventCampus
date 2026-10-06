@@ -1,0 +1,17 @@
+{% extends 'layout/main.html.twig' %}
+
+{% block title %}Page introuvable{% endblock %}
+
+{% block content %}
+    <div class="text-center py-5">
+        <p class="display-1 fw-bold text-primary">404</p>
+        <h1 class="h3">Cette page n'existe pas.</h1>
+        <p class="text-secondary">
+            L'événement a peut-être été supprimé, ou le lien est incorrect.
+        </p>
+        <div class="d-flex justify-content-center gap-2">
+            <a href="{{ path('app_evenement_index') }}" class="btn btn-primary">Voir les événements</a>
+            <a href="{{ path('app_accueil') }}" class="btn btn-outline-primary">Retour à l'accueil</a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'layout/main.html.twig' %}
+
+{% block title %}{{ evenement.titre }}{% endblock %}
+
+{% block content%}
+    <p><a href="{{ path('app_evenement_index') }}">Retour à la liste</a></p>
+
+    <h1>{{ evenement.titre }}</h1>
+    <p>{{ evenement.description }}</p>
+
+    <ul>
+        <li>Début : {{ evenement.date_debut|date('d/m/Y H:i') }}</li>
+        <li>Fin : {{ evenement.date_fin|date('d/m/Y H:i') }}</li>
+        <li>Lieu : {{ evenement.lieu }}</li>
+        <li>Organisateur : {{ evenement.organisateur }}</li>
+        <li>Catégorie : {{ evenement.categorie }}</li>
+        <li>Prix : {{ evenement.prix }} €</li>
+        <li>Places : {{ evenement.places_disponibles }} restantes sur {{ evenement.places_totales }}</li>
+        <li>Places déjà prises : {{ evenement.places_totales - evenement.places_disponibles }}</li>
+    </ul>
+    {% if evenement.statut == 'annule' %}
+        <p><strong>Événement annulé.</strong> Les réservations sont fermées.</p>
+    {% elseif evenement.statut == 'complet' %}
+        <p><strong>Événement complet.</strong> Il n'y a plus de place disponible.</p>
+    {% else %}
+        <p><strong>Ouvert.</strong> Il reste {{ evenement.places_disponibles }} places.</p>
+    {% endif %}
+{% endblock %}

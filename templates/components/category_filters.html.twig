@@ -1,0 +1,11 @@
+{% set active = active|default(null) %}
+
+<div class="d-flex flex-wrap gap-2 mb-4">
+    <a class="btn btn-sm {{ active is null ? 'btn-primary' : 'btn-outline-primary' }}"
+       href="{{ path('app_evenement_index') }}">Tous</a>
+
+    {% for cat in ['culturel', 'sportif', 'associatif', 'festif'] %}
+        <a class="btn btn-sm {{ active == cat ? 'btn-primary' : 'btn-outline-primary' }}"
+           href="{{ path('app_evenement_categorie', {categorie: cat}) }}">{{ cat|capitalize }}</a>
+    {% endfor %}
+</div>

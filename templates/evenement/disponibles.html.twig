@@ -1,0 +1,15 @@
+{% extends 'layout/main.html.twig' %}
+
+{% block title %}Au moins {{ nombre }} places{% endblock %}
+
+{% block content %}
+    <h1 class="mb-3">{{ evenements|length }} événement(s) avec au moins {{ nombre }} places</h1>
+
+    {{ include('components/category_filters.html.twig', {active: categorie}) }}
+
+    {% for evenement in evenements %}
+        <p>{{ evenement.titre }}</p>
+    {% else %}
+        <p>Aucun événement.</p>
+    {% endfor %}
+{% endblock %}
